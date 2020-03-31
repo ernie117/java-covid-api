@@ -5,9 +5,8 @@ import com.practice.covid19api.repos.Covid19Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,8 +32,7 @@ public class DatesService {
         );
     }
 
-    public Optional<DateDocument> getDocumentByDate(LocalDate localDate) {
-        System.out.println(localDate);
+    public Optional<DateDocument> getDocumentByDate(Date localDate) {
         return Optional.ofNullable(covid19Repo.findByDate(localDate));
     }
 }

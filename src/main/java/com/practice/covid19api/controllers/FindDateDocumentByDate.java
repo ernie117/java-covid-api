@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @RestController
 @ResponseStatus(HttpStatus.OK)
@@ -32,14 +32,12 @@ public class FindDateDocumentByDate {
 
     @GetMapping(value = "/v1/findByDate")
     public ResponseEntity<DateDocument> findByDate(@RequestParam("date")
-                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate) {
+                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date localDate) {
         return datesService.getDocumentByDate(localDate)
-                .map(dateDocument -> {
-                    System.out.println(dateDocument);
-                    return ResponseEntity
-                                    .ok()
-                                    .body(dateDocument);
-                        }
+                .map(dateDocument ->
+                        ResponseEntity
+                                .ok()
+                                .body(dateDocument)
                 ).orElse(ResponseEntity.noContent().build());
     }
 }
