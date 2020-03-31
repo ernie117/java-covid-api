@@ -3,13 +3,11 @@ package com.practice.covid19api.pojos;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
@@ -24,9 +22,9 @@ public class DateDocument {
             = Comparator.comparing(DateDocument::getDate);
 
     @Id
-    private ObjectId id;
+    private String id;
 
-    private LocalDateTime date;
+    private LocalDate date;
     private List<Country> countries;
 
 }
