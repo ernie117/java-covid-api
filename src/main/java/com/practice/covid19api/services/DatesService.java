@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DatesService {
@@ -20,8 +21,13 @@ public class DatesService {
     }
 
     public Optional<List<DateDocument>> getAllDates() {
-        List<DateDocument> things = Collections.unmodifiableList(covid19Repo.findAll());
-        System.out.println(things);
-        return Optional.of(things);
+        return Optional.of(
+                Collections.unmodifiableList(
+                        covid19Repo.findAll()
+                                .stream()
+                                .sorted(DateDocument.BY_DATE)
+                                .collect(Collectors.toList())
+                )
+        );
     }
 }

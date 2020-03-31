@@ -30,11 +30,10 @@ public class ReturnAllDatesController {
     @GetMapping(value = "/v1/allDates")
     public ResponseEntity<List<DateDocument>> fetchAllDateDocuments() {
         return datesService.getAllDates()
-                .map(dates -> {
-                    System.out.println(dates.size());
-                    return ResponseEntity
+                .map(dates ->
+                    ResponseEntity
                             .ok()
-                            .body(dates);
-                }).orElse(ResponseEntity.noContent().build());
+                            .body(dates)
+                ).orElse(ResponseEntity.noContent().build());
     }
 }
